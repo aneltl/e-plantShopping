@@ -8,8 +8,12 @@ const CartItem = ({ onContinueShopping }) => {
   const dispatch = useDispatch();
 
   const calculateTotalAmount = () => {
-    return cart.reduce((total, item) => total + item.cost * item.quantity, 0).toFixed(2);
+    return cart.reduce((total, item) => {
+      // Calculate the total cost for each item (cost * quantity)
+      return total + (item.cost * item.quantity);
+    }, 0).toFixed(2); // Start from 0 and ensure it's fixed to 2 decimal places
   };
+  
 
   const handleContinueShopping = () => {
     onContinueShopping();
@@ -44,7 +48,7 @@ const CartItem = ({ onContinueShopping }) => {
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
               <div className="cart-item-name">{item.name}</div>
-              <div className="cart-item-cost">${item.cost}</div>
+              <div className="cart-item-cost">{item.cost}</div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
