@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
+import { useNavigation } from './NavigationContext'; // Import the navigation hook
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
@@ -16,7 +17,11 @@ const CartItem = ({ onContinueShopping }) => {
   
 
   const handleContinueShopping = () => {
-    onContinueShopping();
+    setView('ProductList'); // Set the view to ProductList
+  };
+
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
   };
 
   const handleIncrement = (item) => {
