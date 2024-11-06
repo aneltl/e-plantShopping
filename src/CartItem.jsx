@@ -9,9 +9,11 @@ const CartItem = ({ onContinueShopping }) => {
 
   const calculateTotalAmount = () => {
     return cart.reduce((total, item) => {
-      // Calculate the total cost for each item (cost * quantity)
-      return total + (item.cost * item.quantity);
-    }, 0).toFixed(2); // Start from 0 and ensure it's fixed to 2 decimal places
+      // Convert item.cost from "$12" to 12
+      const cost = parseFloat(item.cost.replace('$', ''));
+      // Multiply quantity by cost and add it to the total
+      return total + (item.quantity * cost);
+    }, 0).toFixed(2); // Start from 0 and ensure the result is rounded to 2 decimal places
   };
   
 
@@ -23,9 +25,9 @@ const CartItem = ({ onContinueShopping }) => {
     alert('Functionality to be added for future reference');
   };
 
-  const handleIncrement = (item) => {
+  function handleIncrement(item) {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
-  };
+  }
 
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
@@ -39,8 +41,13 @@ const CartItem = ({ onContinueShopping }) => {
     dispatch(removeItem(item.name));
   };
 
-  const calculateTotalCost = (item) => {
-    return (item.cost * item.quantity).toFixed(2);
+  const calculateTotalCost = () => {
+    return cart.reduce((total, item) => {
+      // Convert the cost to a number, strip any non-numeric characters (like "$")
+      const cost = parseFloat(item.cost.replace(/[^\d.-]/g, ''));
+      // Calculate the total cost for the item (cost * quantity)
+      return total + (cost * item.quantity);
+    }, 0).toFixed(2); // Set the starting value to 0 and round to 2 decimal places
   };
 
   return (
