@@ -228,12 +228,12 @@ function ProductList() {
             ]
         }
     ];
-   const styleObj={
+  const styleObj={
     backgroundColor: '#4CAF50',
     color: '#fff!important',
     padding: '15px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: ' space-between',
     alignItems: 'center',
     fontSize: '20px',
    }
